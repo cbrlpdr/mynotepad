@@ -61,7 +61,7 @@ class Notepad:
         # Adding commands: New, Open and Save
         self.__thisFileMenu.add_command(label="New", command=lambda self=self: self.__new_file())
         self.__thisFileMenu.add_command(label="Open", command=lambda self=self: self.__open_file())
-        #self.__thisFileMenu.add_command(label="Save", command=self.__save_file())
+        self.__thisFileMenu.add_command(label="Save", command=lambda self=self:self.__save_file())
 
         self.__thisFileMenu.add_separator()
         #self.__thisFileMenu.add_command(label="Exit", command=self.__quit_app())
@@ -96,7 +96,7 @@ class Notepad:
 
     def __save_file(self):
         if self.__file is None:
-            self.__file = asksaveasfilename(initalfile='Untitled.txt', defaultextension=".txt",
+            self.__file = asksaveasfilename(initialfile='Untitled.txt', defaultextension=".txt",
                                             filetypes=[("All Files", "*.*"), ("Text Documents", "*.txt")])
 
             if self.__file == "":
