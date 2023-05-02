@@ -65,8 +65,8 @@ class Notepad:
 
         self.__thisMenuBar.add_cascade(label="File", menu=self.__thisFileMenu)
 
-        # self.__thisFileMenu.add_separator()
-        # self.__thisFileMenu.add_command(label="Exit", command=self.__quit_app())
+        self.__thisFileMenu.add_separator()
+        self.__thisFileMenu.add_command(label="Exit", command=lambda self=self: self.__quit_app())
 
         # Adding commands: Cut, Copy and Paste
 
