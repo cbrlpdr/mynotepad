@@ -61,24 +61,35 @@ class Notepad:
         # Adding commands: New, Open and Save
         self.__thisFileMenu.add_command(label="New", command=lambda self=self: self.__new_file())
         self.__thisFileMenu.add_command(label="Open", command=lambda self=self: self.__open_file())
-        self.__thisFileMenu.add_command(label="Save", command=lambda self=self:self.__save_file())
-
-        self.__thisFileMenu.add_separator()
-        #self.__thisFileMenu.add_command(label="Exit", command=self.__quit_app())
+        self.__thisFileMenu.add_command(label="Save", command=lambda self=self: self.__save_file())
 
         self.__thisMenuBar.add_cascade(label="File", menu=self.__thisFileMenu)
 
+        # self.__thisFileMenu.add_separator()
+        # self.__thisFileMenu.add_command(label="Exit", command=self.__quit_app())
+
+        # Adding commands: Cut, Copy and Paste
+
+        self.__thisEditMenu.add_command(label="Cut", command=lambda self=self: self.__cut)
+        self.__thisEditMenu.add_command(label="Copy", command=lambda self=self: self.__copy)
+        self.__thisEditMenu.add_command(label="Paste", command=lambda self=self: self.__paste)
+
+        self.__thisMenuBar.add_cascade(label="Edit", menu=self.__thisEditMenu)
+
+        self.__thisHelpMenu.add_command(label="About MyNotepad", command=lambda self=self: self.__showabout)
+        self.__thisHelpMenu.add_cascade(label="Help", menu=self.__thisHelpMenu)
+
         self.__root.config(menu=self.__thisMenuBar)
-        #self.__thisScrollBar.pack(side=RIGHT, fill=Y)
+        # self.__thisScrollBar.pack(side=RIGHT, fill=Y)
         # Scrollbar content auto-adjust
-        #self.__thisScrollBar.config(command=self.__thisTextArea.yview)
-        #self.__thisTextArea.config(yscrollcommand=self.__thisScrollBar.set)
+        # self.__thisScrollBar.config(command=self.__thisTextArea.yview)
+        # self.__thisTextArea.config(yscrollcommand=self.__thisScrollBar.set)
 
     def __quit_app(self):
         self.__root.destroy()
 
     def __open_file(self):
-        self.__file = askopenfilename (defaultextension=".txt",
+        self.__file = askopenfilename(defaultextension=".txt",
                                       filetypes=[("All Files", '*.*'), ("Text Documents", "*.txt")])
         if self.__file == "":
             self.__file = None
@@ -111,7 +122,14 @@ class Notepad:
             file.write(self.__thisTextArea.get(1.8, END))
             file.close()
 
+    def __cut(self):
+        self.__thisTextArea.event_generate("<<Cut>>")
 
+    def __copy(self):
+        self.__thisTextArea.event_generate("<<Copy>>")
+
+    def __paste(self):
+        self.__thisTextArea.event_generate("<<Paste>>")
 
     def run(self):
         self.__root.mainloop()
