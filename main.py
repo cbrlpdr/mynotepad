@@ -9,10 +9,11 @@ class Notepad:
     __root = Tk()
     __thisWidth = 300
     __thisHeight = 300
-    __thisTextArea = Text(__root)
+    __thisTextArea = Text(__root, bg="#EEEEEE")
     __thisMenuBar = Menu(__root)
     __thisFileMenu = Menu(__thisMenuBar)
     __thisEditMenu = Menu(__thisMenuBar)
+    __thisPrefMenu = Menu(__thisMenuBar)
     __thisHelpMenu = Menu(__thisMenuBar)
 
     # Scrollbar
@@ -58,6 +59,8 @@ class Notepad:
         # Add controls
         self.__thisTextArea.grid(sticky=N + E + S + W)
 
+
+
         # Adding commands: New, Open and Save
         self.__thisFileMenu.add_command(label="New", command=lambda self=self: self.__new_file())
         self.__thisFileMenu.add_command(label="Open", command=lambda self=self: self.__open_file())
@@ -74,7 +77,11 @@ class Notepad:
         self.__thisEditMenu.add_command(label="Copy", command=lambda self=self: self.__copy)
         self.__thisEditMenu.add_command(label="Paste", command=lambda self=self: self.__paste)
 
+
         self.__thisMenuBar.add_cascade(label="Edit", menu=self.__thisEditMenu)
+
+        self.__thisPrefMenu.add_command(label="Toggle color mode", command=lambda self=self: self.__toggle_color_mode())
+        self.__thisMenuBar.add_cascade(label="Preferences", menu=self.__thisPrefMenu)
 
         self.__thisHelpMenu.add_command(label="About MyNotepad", command=lambda self=self: self.__showabout)
         self.__thisHelpMenu.add_cascade(label="Help", menu=self.__thisHelpMenu)
@@ -84,6 +91,14 @@ class Notepad:
         # Scrollbar content auto-adjust
         # self.__thisScrollBar.config(command=self.__thisTextArea.yview)
         # self.__thisTextArea.config(yscrollcommand=self.__thisScrollBar.set)
+
+    def __toggle_color_mode(self):
+        if self.__thisTextArea["bg"] == "#EEEEEE":
+            self.__thisTextArea["bg"] = "#181818"
+            self.__thisTextArea["fg"] = "white"
+        else:
+            self.__thisTextArea["bg"] = "#EEEEEE"
+            self.__thisTextArea["fg"] = "black"
 
     def __quit_app(self):
         self.__root.destroy()
