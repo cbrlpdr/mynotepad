@@ -71,9 +71,9 @@ class Notepad:
 
         # Adding commands: Cut, Copy and Paste
 
-        self.__thisEditMenu.add_command(label="Cut", command=lambda self=self: self.__cut)
-        self.__thisEditMenu.add_command(label="Copy", command=lambda self=self: self.__copy)
-        self.__thisEditMenu.add_command(label="Paste", command=lambda self=self: self.__paste)
+        self.__thisEditMenu.add_command(label="Cut", command=lambda self=self: self.__cut())
+        self.__thisEditMenu.add_command(label="Copy", command=lambda self=self: self.__copy())
+        self.__thisEditMenu.add_command(label="Paste", command=lambda self=self: self.__paste())
 
         self.__thisMenuBar.add_cascade(label="Edit", menu=self.__thisEditMenu)
 
