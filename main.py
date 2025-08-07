@@ -11,10 +11,10 @@ class Notepad:
     __thisHeight = 300
     __thisTextArea = Text(__root, bg="#EEEEEE", font=("Consolas", 14))
     __thisMenuBar = Menu(__root)
-    __thisFileMenu = Menu(__thisMenuBar)
-    __thisEditMenu = Menu(__thisMenuBar)
-    __thisPrefMenu = Menu(__thisMenuBar)
-    __thisHelpMenu = Menu(__thisMenuBar)
+    __thisFileMenu = Menu(__thisMenuBar, tearoff=0)
+    __thisEditMenu = Menu(__thisMenuBar, tearoff=0)
+    __thisPrefMenu = Menu(__thisMenuBar, tearoff=0)
+    __thisHelpMenu = Menu(__thisMenuBar, tearoff=0)
     __thisFontSize = 14
 
     # Scrollbar
@@ -67,7 +67,6 @@ class Notepad:
 
         self.__thisMenuBar.add_cascade(label="File", menu=self.__thisFileMenu)
 
-        self.__thisFileMenu.add_separator()
         self.__thisFileMenu.add_command(label="Exit", command=lambda self=self: self.__quit_app())
 
         # Adding commands: Cut, Copy and Paste
@@ -80,7 +79,6 @@ class Notepad:
 
         self.__thisPrefMenu.add_command(label="Toggle color mode",
                                         command=lambda self=self: self.__toggle_color_mode())
-        self.__thisPrefMenu.add_separator()
         self.__thisPrefMenu.add_command(label="Increase font size",
                                         command=lambda self=self: self.__increase_font_size())
         self.__thisPrefMenu.add_command(label="Decrease font size",
@@ -168,5 +166,7 @@ class Notepad:
         self.__root.mainloop()
 
 
+notepad = Notepad(width=600, height=800)
+notepad.run()
 notepad = Notepad(width=600, height=800)
 notepad.run()
